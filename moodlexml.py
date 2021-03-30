@@ -1,16 +1,19 @@
 import xml.etree.ElementTree as ET
 
 
-def createSubElem(elem, tag, attribs=None):
+def createSubElem(elem, tag, attribs=None, text=None):
     sub_elem = ET.SubElement(elem, tag)
     if attribs != None:
         for k, v in attribs.items():
             sub_elem.set(k, v)
 
+    if text != None:
+        sub_elem.text = text
+
     return sub_elem
 
 
-def createSubElemWithText(elem, tag, attribs, text_str=None):
+def createSubElemWithText(elem, tag, attribs=None, text_str=None):
     sub_elem = createSubElem(elem, tag, attribs)
     text_elem = ET.SubElement(sub_elem, "text")
     if text_str != None:
@@ -19,23 +22,7 @@ def createSubElemWithText(elem, tag, attribs, text_str=None):
     return sub_elem
 
 
-def createSubElemWithVal(elem, tag, val):
-    sub_elem = createSubElem(elem, tag)
-    sub_elem.text = val
-
-
-def createSubElems(elem, tags, formats, text_strs, vals):
-    for t in tags:
-        if t in formats:
-            attrib = {"format": formats[t]}
-            _ = createSubElemWithText(elem, t, attrib, text_strs[t])
-        elif t in vals:
-            createSubElemWithVal(elem, t, vals[t])
-        else:
-            createSubElem(elem, t)
-
-
-def putCD(s):
+def cdata(s):
     return "<![CDATA[" + s + "]]>"
 
 
@@ -57,16 +44,16 @@ class Category(MoodleElement):
         MoodleElement.__init__(self, "question")
         self.set("type", "category")
 
-        # Create category elem with text subelem with category name
-        text_str = "$course$/top/" + name
+        # Create <category> with <text> containing name
         cat_att = {"format": "plain_text"}
+        text_str = "$course$/top/" + name
         _ = createSubElemWithText(self, "category", cat_att, text_str)
 
-        # Create info element with (empty) text subelem
+        # Create <info> with <text> (empty)
         info_att = {"format": "html"}
         _ = createSubElemWithText(self, "info", info_att)
 
-        # Create idnumber element
+        # Create <idnumber>
         createSubElem(self, "idnumber")
 
 
@@ -76,23 +63,19 @@ class Question(MoodleElement):
         """Create question element without type"""
         MoodleElement.__init__(self, "question")
 
-        # List of tags to create
-        tags = ["name", "questiontext", "generalfeedback",
-                "defaultgrade", "penalty", "hidden", "idnumber"]
-
-        # Dicts of tags that contain <text>
+        # Dict of tags that contain <text>
         plain, html = "plain_text", "html"
-        formats = {"name": plain, "questiontext": html,
-                "generalfeedback": html}
-        text_strs = {"name": putCD(name), "questiontext": putCD(text),
-                "generalfeedback": ""}
+        texts = {"name": [plain, cdata(name)],
+                "questiontext": [html, cdata(text)],
+                "generalfeedback": [html, ""]}
+        for k, v in texts.items():
+            createSubElemWithText(self, k, {"format": v[0]}, v[1])
 
         # Dict of tags that do not contain <text> and their contents
         vals = {"defaultgrade": "1", "penalty": "0.3333333",
                 "hidden": "0", "idnumber": ""}
-
-        # Create tags specified above
-        createSubElems(self, tags, formats, text_strs, vals)
+        for k, v in vals.items():
+            createSubElem(self, k, None, v)
 
 
 class Multichoice(Question):
@@ -102,33 +85,26 @@ class Multichoice(Question):
         Question.__init__(self, name, text)
         self.set("type", "multichoice")
 
-        # List of additional tags to create
-        tags = ["single", "shuffleanswers", "answernumbering",
-                "correctfeedback", "partiallycorrectfeedback",
-                "incorrectfeedback", "shownumcorrect"]
-
         # Dicts of tags that contain <text>
         plain, html = "plain_text", "html"
-        formats = {"correctfeedback": html,
-                "partiallycorrectfeedback": html,
-                "incorrectfeedback": html}
-        text_strs = {"correctfeedback":
-            putCD("<p>Sua resposta está correta.</p>"),
-            "partiallycorrectfeedback":
-            putCD("<p>Sua resposta está parcialmente correta.</p>"),
-            "incorrectfeedback":
-            putCD("<p>Sua resposta está incorreta.</p>")}
+        cor_msg = cdata("<p>Your answer is correct.</p>")
+        pco_msg = cdata("<p>Your answer is partially correct.</p>")
+        inc_msg = cdata("<p>Your answer is incorrect.</p>")
+        texts = {"correctfeedback": [html, cor_msg],
+                "partiallycorrectfeedback": [html, pco_msg],
+                "incorrectfeedback": [html, inc_msg]}
+        for k, v in texts.items():
+            createSubElemWithText(self, k, {"format": v[0]}, v[1])
 
         # Dict of tags that do not contain <text> and their contents
         vals = {"single": "true", "shuffleanswers": "true",
                 "answernumbering": "abc", "shownumcorrect": ""}
-
-        # Create tags specified above
-        createSubElems(self, tags, formats, text_strs, vals)
+        for k, v in vals.items():
+            createSubElem(self, k, None, v)
 
         for a in answers:
             ans_att = {"fraction": a[0], "format": "html"}
-            ans_str = putCD(a[1])
+            ans_str = cdata(a[1])
             ans_elem = createSubElemWithText(self, "answer", ans_att,
                     ans_str)
             fb_att = {"format": "html"}
