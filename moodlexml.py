@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import xml.sax.saxutils as SU
 
 
 def createSubElem(elem, tag, attribs=None, text=None):
@@ -27,7 +28,16 @@ def cdata(s):
 
 
 class MoodleElement(ET.Element):
-    pass
+    """Moodle xml element"""
+    def __init__(self, name):
+        """Create element"""
+        ET.Element.__init__(self, name)
+
+    def __str__(self):
+        self_str = ET.tostring(self, encoding="unicode", xml_declaration=True)
+        self_str = SU.unescape(self_str)
+
+        return self_str
 
 
 class Quiz(MoodleElement):
