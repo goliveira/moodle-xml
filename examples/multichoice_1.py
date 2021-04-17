@@ -1,3 +1,5 @@
+import sys
+sys.path.append("../")
 import moodlexml as MX
 
 # Create an empty quiz
@@ -7,8 +9,7 @@ quiz = MX.Quiz()
 cat = MX.Category("Multichoice questions")
 quiz.append(cat)
 
-# Create a multichoice question with name, text, answers and append to
-# quiz
+# Create multichoice question with name, text, answers. Append to quiz
 name = "<p>Example 1 - The simplest multichoice question</p>"
 text = "<p>What is the area of a triangle of base 7 and height 4?</p>"
 ans1 = ["100", "<p>14</p>"]
@@ -22,6 +23,7 @@ quiz.append(question_mc)
 print(quiz)
 
 # Write quiz to a file
-text_file = open("output.xml", "w")
+file_name = "multichoice_1.xml"
+text_file = open(file_name, "w")
 print(quiz, file=text_file)
 text_file.close()
