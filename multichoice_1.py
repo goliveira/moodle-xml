@@ -1,5 +1,3 @@
-import sys
-sys.path.append("../")
 import moodlexml as MX
 
 # Create an empty quiz
