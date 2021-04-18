@@ -3,13 +3,8 @@ import moodlexml as MX
 # Create an empty quiz
 quiz = MX.Quiz()
 
-# Create a category with name and append to quiz
-cat = MX.Category("Multichoice questions")
-quiz.append(cat)
-
-# Create a multichoice question with name, text and answers and append
-# to quiz
-name = "<p>Example 1 - The simplest multichoice question</p>"
+# Create a multichoice question and append to quiz
+name = "Example 1 - The simplest multichoice question"
 text = "<p>What is the area of a triangle of base 7 and height 4?</p>"
 ans1 = ["100", "<p>14</p>"]
 ans2 = ["0", "<p>28</p>"]

@@ -1,2 +1,63 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<quiz><question type="category"><category format="plain_text"><text>$course$/top/Multichoice questions</text></category><info format="html"><text /></info><idnumber /></question><question type="multichoice"><name format="plain_text"><text><![CDATA[<p>Example 1 - The simplest multichoice question</p>]]></text></name><questiontext format="html"><text><![CDATA[<p>What is the area of a triangle of base 7 and height 4?</p>]]></text></questiontext><generalfeedback format="html"><text /></generalfeedback><defaultgrade>1</defaultgrade><penalty>0.3333333</penalty><hidden>0</hidden><idnumber /><correctfeedback format="html"><text><![CDATA[<p>Your answer is correct.</p>]]></text></correctfeedback><partiallycorrectfeedback format="html"><text><![CDATA[<p>Your answer is partially correct.</p>]]></text></partiallycorrectfeedback><incorrectfeedback format="html"><text><![CDATA[<p>Your answer is incorrect.</p>]]></text></incorrectfeedback><single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering><shownumcorrect /><answer fraction="100" format="html"><text><![CDATA[<p>14</p>]]></text><feedback format="html"><text /></feedback></answer><answer fraction="0" format="html"><text><![CDATA[<p>28</p>]]></text><feedback format="html"><text /></feedback></answer><answer fraction="0" format="html"><text><![CDATA[<p>11</p>]]></text><feedback format="html"><text /></feedback></answer></question></quiz>
+<quiz>
+    <question type="multichoice">
+        <name format="plain_text">
+            <text>Example 1 - The simplest multichoice question</text>
+        </name>
+        <questiontext format="html">
+            <text>
+                <![CDATA[<p>What is the area of a triangle of base 7 and height 4?</p>]]>
+            </text>
+        </questiontext>
+        <generalfeedback format="html">
+            <text />
+        </generalfeedback>
+        <defaultgrade>1</defaultgrade>
+        <penalty>0.3333333</penalty>
+        <hidden>0</hidden>
+        <idnumber />
+        <correctfeedback format="html">
+            <text>
+                <![CDATA[<p>Your answer is correct.</p>]]>
+            </text>
+        </correctfeedback>
+        <partiallycorrectfeedback format="html">
+            <text>
+                <![CDATA[<p>Your answer is partially correct.</p>]]>
+            </text>
+        </partiallycorrectfeedback>
+        <incorrectfeedback format="html">
+            <text>
+                <![CDATA[<p>Your answer is incorrect.</p>]]>
+            </text>
+        </incorrectfeedback>
+        <single>true</single>
+        <shuffleanswers>true</shuffleanswers>
+        <answernumbering>abc</answernumbering>
+        <shownumcorrect />
+        <answer fraction="100" format="html">
+            <text>
+                <![CDATA[<p>14</p>]]>
+            </text>
+            <feedback format="html">
+                <text />
+            </feedback>
+        </answer>
+        <answer fraction="0" format="html">
+            <text>
+                <![CDATA[<p>28</p>]]>
+            </text>
+            <feedback format="html">
+                <text />
+            </feedback>
+        </answer>
+        <answer fraction="0" format="html">
+            <text>
+                <![CDATA[<p>11</p>]]>
+            </text>
+            <feedback format="html">
+                <text />
+            </feedback>
+        </answer>
+    </question>
+</quiz>
