@@ -81,7 +81,7 @@ class Question(MoodleElement):
 
         # Dict of tags that contain <text>
         plain, html = "plain_text", "html"
-        texts = {"name": [plain, cdata(name)],
+        texts = {"name": [plain, name],
                 "questiontext": [html, cdata(text)],
                 "generalfeedback": [html, ""]}
         for k, v in texts.items():
