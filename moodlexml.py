@@ -2,19 +2,23 @@ import xml.etree.ElementTree as ET
 import xml.sax.saxutils as SU
 
 
-def createSubElem(elem, tag, attribs=None, text=None):
+def createSubElem(elem, tag, attribs=None, text_str=None):
+    """Insert into elem a subelement with tag, attribs and text_str.
+    Return a handle to the subelement."""
     sub_elem = ET.SubElement(elem, tag)
     if attribs != None:
         for k, v in attribs.items():
             sub_elem.set(k, v)
 
-    if text != None:
-        sub_elem.text = text
+    if text_str != None:
+        sub_elem.text = text_str
 
     return sub_elem
 
 
 def createSubElemWithText(elem, tag, attribs=None, text_str=None):
+    """Insert into elem a subelement with tag and attribs and containing
+    a text tag with text_str. Return a handle to the subelement."""
     sub_elem = createSubElem(elem, tag, attribs)
     text_elem = ET.SubElement(sub_elem, "text")
     if text_str != None:
@@ -24,6 +28,7 @@ def createSubElemWithText(elem, tag, attribs=None, text_str=None):
 
 
 def cdata(s):
+    """Surround a string with CDATA tags"""
     return "<![CDATA[" + s + "]]>"
 
 
@@ -34,6 +39,7 @@ class MoodleElement(ET.Element):
         ET.Element.__init__(self, name)
 
     def __str__(self):
+        """Represent a MoodleElement as a string"""
         self_str = ET.tostring(self, encoding="unicode", xml_declaration=True)
         self_str = SU.unescape(self_str)
 
