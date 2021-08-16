@@ -103,9 +103,9 @@ class Multichoice(Question):
 
         # Dicts of tags that contain <text>
         plain, html = "plain_text", "html"
-        cor_msg = cdata("<p>Your answer is correct.</p>")
-        pco_msg = cdata("<p>Your answer is partially correct.</p>")
-        inc_msg = cdata("<p>Your answer is incorrect.</p>")
+        cor_msg = cdata("<p>Sua resposta está correta.</p>")
+        pco_msg = cdata("<p>Sua resposta está parcialmente correta.</p>")
+        inc_msg = cdata("<p>Sua resposta está incorreta.</p>")
         texts = {"correctfeedback": [html, cor_msg],
                 "partiallycorrectfeedback": [html, pco_msg],
                 "incorrectfeedback": [html, inc_msg]}

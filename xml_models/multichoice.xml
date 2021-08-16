@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz>
-<!-- question: 716888  -->
   <question type="multichoice">
     <name>
-      <text>Name of question</text>
+      <text>Multichoice - Modelo</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<p>Text of question</p>]]></text>
+      <text><![CDATA[<p>Texto da questão.</p>]]></text>
     </questiontext>
     <generalfeedback format="html">
       <text></text>
@@ -18,6 +17,7 @@
     <single>true</single>
     <shuffleanswers>true</shuffleanswers>
     <answernumbering>abc</answernumbering>
+    <showstandardinstruction>0</showstandardinstruction>
     <correctfeedback format="html">
       <text>Sua resposta está correta.</text>
     </correctfeedback>
@@ -29,19 +29,19 @@
     </incorrectfeedback>
     <shownumcorrect/>
     <answer fraction="100" format="html">
-      <text><![CDATA[<p>Text of correct answer</p>]]></text>
+      <text><![CDATA[<p>Texto da resposta correta.</p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
     <answer fraction="0" format="html">
-      <text><![CDATA[<p>Text of incorrect answer</p>]]></text>
+      <text><![CDATA[<p>Texto da resposta incorreta 1.</p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
     <answer fraction="0" format="html">
-      <text><![CDATA[<p>Text of incorrect answer</p>]]></text>
+      <text><![CDATA[<p>Texto da resposta incorreta 2.</p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>

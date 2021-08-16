@@ -4,8 +4,8 @@ import moodlexml as MX
 quiz = MX.Quiz()
 
 # Create a multichoice question and append to quiz
-name = "Example 1 - The simplest multichoice question"
-text = "<p>What is the area of a triangle of base 7 and height 4?</p>"
+name = "Multichoice - Exemplo 1"
+text = "<p>Qual é a área de um triângulo de base 7 e altura 4?</p>"
 ans1 = ["100", "<p>14</p>"]
 ans2 = ["0", "<p>28</p>"]
 ans3 = ["0", "<p>11</p>"]
